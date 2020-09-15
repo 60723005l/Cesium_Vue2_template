@@ -10,8 +10,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const cesiumSource = 'node_modules/cesium/Source'
+const cesiumWorkers = '../Build/Cesium/Workers'
 
-const env = require('../config/prod.env')
+const env = process.env.NODE_ENV === 'testing'
+  ? require('../config/test.env')
+  : require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -61,7 +65,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: config.build.index,
+      filename: process.env.NODE_ENV === 'testing'
+        ? 'index.html'
+        : config.build.index,
       template: 'index.html',
       inject: true,
       minify: {
@@ -114,8 +120,19 @@ const webpackConfig = merge(baseWebpackConfig, {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
-      }
-    ])
+      },
+      { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
+      { from: path.join(cesiumSource, 'Assets'), to: 'Assets' },
+      { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' },
+      // { from: path.join('ThirdParty/Workers'), to: 'ThirdParty/Workers' }
+    ]),
+
+    new webpack.DefinePlugin
+    ({
+        // Define relative base path in cesium for loading assets
+        'process.env': env,
+        CESIUM_BASE_URL: JSON.stringify('./')
+    }),
   ]
 })
 
