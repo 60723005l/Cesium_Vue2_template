@@ -12,6 +12,9 @@ const portfinder = require('portfinder')
 const cesiumSource = 'node_modules/cesium/Source'
 const cesiumWorkers = '../Build/Cesium/Workers'
 
+const env = require('../config/dev.env')
+console.log(env)
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
