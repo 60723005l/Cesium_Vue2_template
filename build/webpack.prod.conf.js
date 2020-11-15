@@ -12,6 +12,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const cesiumSource = 'node_modules/cesium/Source'
 const cesiumWorkers = '../Build/Cesium/Workers'
+const cesiumThirdParty = '../Build/Cesium/ThirdParty'
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -124,7 +125,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
       { from: path.join(cesiumSource, 'Assets'), to: 'Assets' },
       { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' },
-      // { from: path.join('ThirdParty/Workers'), to: 'ThirdParty/Workers' }
+      { from: path.join(cesiumSource, cesiumThirdParty), to: 'ThirdParty' }
     ]),
 
     new webpack.DefinePlugin
@@ -135,6 +136,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
   ]
 })
+
+
+
 
 if (config.build.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')

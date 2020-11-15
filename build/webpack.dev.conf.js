@@ -11,6 +11,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const cesiumSource = 'node_modules/cesium/Source'
 const cesiumWorkers = '../Build/Cesium/Workers'
+const cesiumThirdParty = '../Build/Cesium/ThirdParty'
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -73,6 +74,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
       { from: path.join(cesiumSource, 'Assets'), to: 'Assets' },
       { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' },
+      { from: path.join(cesiumSource, cesiumThirdParty), to: 'ThirdParty' }
       // { from: path.join('ThirdParty/Workers'), to: 'ThirdParty/Workers' }
     ]),
     new webpack.DefinePlugin
