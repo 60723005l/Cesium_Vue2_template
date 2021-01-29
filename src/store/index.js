@@ -3,22 +3,30 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  Cesium:undefined,
-  viewer:undefined,
-  scene:undefined,
-  DataCenter:undefined,
+  // Cesium:undefined,
+  // viewer:{},
+  // DataCenter:{},
   selectedLayer:undefined,
+  selectedProject:undefined,
+  authenticated:false,
 }
 
 const mutations = {
-  addCesium (state, c) {state.Cesium = c},
-  addViewer (state, c) {state.viewer = c},
-  addScene (state, c) {state.scene = c},
-  setDataCenter (state,c){state.DataCenter = c},
+  // addCesium (state, c) {state.Cesium = c},
+  // addViewer (state, {viewerElemID,viewer})
+  // {
+  //   state.viewer[viewerElemID] = viewer
+  // },
+  // setDataCenter (state,{centerName,center})
+  // {
+  //   state.DataCenter[centerName] = center
+  // },
   setSelectedLayer (state,layer) {state.selectedLayer = layer},
-  authenticate (state, bool, token) {
-    state.authenticated = bool;
-    state.token = token;
+  setSelectedProject (state,project) {state.selectedProject = project},
+  authenticate (state, {status,user_info})
+  {
+    state.authenticated = status;
+    state.user_info = user_info;
     console.log('User authenticated!')
   },
   deauthenticate(state, bool){

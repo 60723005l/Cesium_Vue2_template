@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import CesiumContainer from '@/components/CesiumContainer'
+import Home from '@/pages/Home'
 
 Vue.use(Router)
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'CesiumContainer',
-      component: CesiumContainer
+      name: 'Home',
+      component: Home
     }
   ]
 })

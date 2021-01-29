@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+require('@/lib/css/main.css');
+require('@/lib/css/global.css');
+
 
 Vue.config.productionTip = false
 
