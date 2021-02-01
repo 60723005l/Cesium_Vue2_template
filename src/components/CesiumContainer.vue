@@ -28,13 +28,10 @@ export default {
   },
   mounted: function ()
     {
-      // console.log(999,this)
       let viewer = new Cesium.Viewer(this.CesiumViewerElemID);
-      // console.log(Global)
-      // this.viewer = viewer
       this.set_BuildModuleUrl()
       this.heatMap_minin(viewer)
-      this.set_vuexStore(viewer)
+      this.set_GlobalStore(viewer)
       this.reset_CesiumTimeline(viewer)
 
     },
@@ -49,7 +46,7 @@ export default {
       {
         var hm = new HM(Cesium,viewer)
       },
-      set_vuexStore:function(viewer)
+      set_GlobalStore:function(viewer)
       {
         Global.viewer[this.CesiumViewerElemID] = viewer
         Global.DataCenter[this.dataCenterName] = new DataCenter(this.dataCenterName,viewer,Cesium)
@@ -64,7 +61,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .cesiumContainer{
     width: 100%;
