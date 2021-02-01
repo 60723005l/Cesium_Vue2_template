@@ -51,21 +51,8 @@ export default {
       },
       set_vuexStore:function(viewer)
       {
-        // var viewer_payload = 
-        //   {
-        //     viewerElemID:this.CesiumViewerElemID,
-        //     viewer:viewer
-        //   }
-        // var dateCenter_payload = 
-        //   {
-        //     centerName:this.dataCenterName,
-        //     center:new DataCenter(this.dataCenterName,viewer,Cesium)
-        //   }
         Global.viewer[this.CesiumViewerElemID] = viewer
         Global.DataCenter[this.dataCenterName] = new DataCenter(this.dataCenterName,viewer,Cesium)
-        // this.$store.commit('addCesium', Cesium)
-        // this.$store.commit('addViewer', viewer_payload)
-        // this.$store.commit('setDataCenter',dateCenter_payload)
       },
       reset_CesiumTimeline:function(viewer)
       {
