@@ -140,11 +140,15 @@ export default {
                 var self = this
                 if(!self.isActivate)
                 {
-                    console.log(666)
                     self.isActivate = true
                     self.compass_start_event = self.compass_start
                     viewer.scene.postUpdate.addEventListener(self.compass_start)
                 }
+                this.$on( "hook:beforeDestroy", () =>
+                {
+                    console.log('ddddd')
+                    this.compass_close(viewer)
+                } )
 
             },
             compass_start()
